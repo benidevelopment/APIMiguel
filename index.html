@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<style>
+#respuesta{
+	position:relative;
+	height:400px;
+	border: 1px solid blue;
+}
+</style>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#boton1").click(function(e){
+		e.preventDefault();
+		$.get($("form").first().attr("action"),
+		      {nombre:$("#nombre").val()},
+			  function(data){
+			    if (data=="FORMATO INCORRECTO"){
+					alert("Problemas con el servidor");
+				}else{
+  				    $("#respuesta").text(data);
+				}
+			  })
+	})
+	
+	$("#boton2").click(function(e){
+		e.preventDefault();
+		$.get($("form").first().attr("action"),
+		      {nombre:$("#nombre").val(),tipo:"html"},
+			  function(data){
+				$("#respuesta").append($(data));
+			  })
+	})
+	
+	$("#boton3").click(function(e){
+		e.preventDefault();
+		$("#respuesta").load("index.php?nombre=SILVERIO");
+	})
+	
+	$("#boton4").click(function(e){
+		e.preventDefault();
+		$.getJSON($("form").first().attr("action"),
+		      {nombre:$("#nombre").val(),tipo:"json"},
+			  function(data){
+			    $.each(data,function(i,v){
+				  $("#respuesta").append($("<div>").text(v.id +" -> " + v.nombre));
+				})
+				})
+	})
+	$("#boton5").click(function(e){
+		e.preventDefault();
+		$.getScript($("form").first().attr("action")+"?tipo=javascript")
+	})
+})
+</script>
+</head>
+<body>
+<form action="index.php">
+<input type="text" name="nombre" id="nombre">
+<input type="submit" value="recibirTexto" id="boton1">
+<input type="submit" value="recibirHTML" id="boton2">
+<input type="submit" value="cargarDefecto" id="boton3">
+<input type="submit" value="recibirJSON" id="boton4">
+<input type="submit" value="recibirScript" id="boton5">
+</form>
+<div id="respuesta">
+
+</div>
+</body>
+</html>

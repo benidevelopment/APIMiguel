@@ -1,0 +1,133 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Prestamo
+ *
+ * @ORM\Table(name="prestamo")
+ * @ORM\Entity
+ */
+class Prestamo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idPrestamo", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idprestamo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="FechaInicio", type="date", nullable=false)
+     */
+    private $fechainicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="FechaFin", type="date", nullable=true)
+     */
+    private $fechafin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Descripcion", type="string", length=45, nullable=false)
+     */
+    private $descripcion;
+
+
+
+    /**
+     * Get idprestamo
+     *
+     * @return integer
+     */
+    public function getIdprestamo()
+    {
+        return $this->idprestamo;
+    }
+
+    /**
+     * Set fechainicio
+     *
+     * @param \DateTime $fechainicio
+     *
+     * @return Prestamo
+     */
+    public function setFechainicio($fechainicio)
+    {
+        $this->fechainicio = $fechainicio;
+
+        return $this;
+    }
+
+    /**
+     * Get fechainicio
+     *
+     * @return \DateTime
+     */
+    public function getFechainicio()
+    {
+        return $this->fechainicio;
+    }
+
+    /**
+     * Set fechafin
+     *
+     * @param \DateTime $fechafin
+     *
+     * @return Prestamo
+     */
+    public function setFechafin($fechafin)
+    {
+        $this->fechafin = $fechafin;
+
+        return $this;
+    }
+
+    /**
+     * Get fechafin
+     *
+     * @return \DateTime
+     */
+    public function getFechafin()
+    {
+        return $this->fechafin;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     *
+     * @return Prestamo
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+    public function __toString() {
+        
+         $descripcion = $this->descripcion;
+         return (string) $descripcion ;
+       }
+}
